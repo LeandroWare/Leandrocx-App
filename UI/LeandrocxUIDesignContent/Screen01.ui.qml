@@ -14,7 +14,6 @@ import QtQuick3D 6.8
 import QtQuick3D.AssetUtils
 import QtQuick.Studio.DesignEffects
 import QtQuick.Studio.Components
-import QtMultimedia
 import QtQuick.Studio.Utils
 
 Rectangle {

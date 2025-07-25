@@ -12,18 +12,18 @@ FileHandler::FileHandler(QObject* parent)
 {}
 
 // arquivo salvo em "%APPDATA%\Leandrocx"
-void FileHandler::saveLsd(QString value){
+void FileHandler::saveLsd(QString content, QString name){
     QString docsPath = qEnvironmentVariable("APPDATA") + "/Leandrocx";
     QDir dir(docsPath);
     if (!dir.exists()){
         dir.mkpath(docsPath);
     }
-    QString fileName = dir.filePath("leandrotxt.lsd"); //real n sei se é simples assim.
+    QString fileName = dir.filePath(name + ".lsd"); //real n sei se é simples assim.
 
     QFile file(fileName);
     if (file.open(QIODevice::WriteOnly | QIODevice::Text)){
         QTextStream out(&file);
-        out << value;
+        out << content;
         file.close();
     } else {
         qWarning() << "ERRO: Impossivel abrir arquivo (saveLsd)" << fileName;
@@ -38,12 +38,12 @@ void FileHandler::saveLsd(QString value){
 QString path = QFileDialog::getSaveFileName(this, "Salvar como...", "", "Textos (*.txt);;Todos (*.*)");
 handler.saveAs(textEdit->toPlainText(), path);
 */
-void saveAs (QString value, QString filepath) {
+void saveAs (QString content, QString filepath) {
     QFile file(filepath);
 
     if(file.open(QIODevice::WriteOnly | QIODevice::Text)) {
         QTextStream out(&file);
-        out << value;
+        out << content;
         file.close();
     } else {
         qWarning() << "ERRO: Impossivel abrir arquivo (saveAs)" << filepath;
@@ -59,25 +59,25 @@ void saveAs (QString value, QString filepath) {
     });
 timer->start(300000); // a cada 5 minutos
 */
-void FileHandler::autoSave(QString value){
+void FileHandler::autoSave(QString content){
     QString docsPath = qEnvironmentVariable("APPDATA") + "/Leandrocx";
     QDir dir(docsPath);
     if (!dir.exists()){
         dir.mkpath(docsPath);
     }
-    QString fileName = dir.filePath("leandrotxt.tmp");
-    saveAs(value, fileName);
+    QString fileName = dir.filePath("nome.lsd");
+    saveAs(content, fileName);
 }
 
 
 //=====================================================================================================================================
-void FileHandler::exportPdf(QString value, QString pdfilepath){
+void FileHandler::exportPdf(QString content, QString pdfilepath){
     QPdfWriter writer(pdfilepath);
     writer.setPageSize(QPageSize::A4);
     writer.setResolution(300);
 
     QTextDocument doc;
-    doc.setHtml(value);
+    doc.setHtml(content);
 
     // CALCULA O TAMANHO DA PÁGINA EM PIXELS E CONVERTE PARA QSizeF
     QRect pageRect = writer.pageLayout()
@@ -96,10 +96,10 @@ void FileHandler::exportPdf(QString value, QString pdfilepath){
     QFile file(fileName);
     if (file.open(QIODevice::ReadOnly | QIODevice::Text)){
         QTextStream in(&file);
-        int value;
-        in >> value;
+        int content;
+        in >> content;
         file.close();
-        return value;
+        return content;
     }
 
     return 0;

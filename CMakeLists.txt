@@ -20,7 +20,11 @@ qt_standard_project_setup()
 
 
 qt_add_executable(${CMAKE_PROJECT_NAME}
-    filehandler.h filehandler.cpp
+    filehandler.h
+    filehandler.h
+    filehandler.cpp
+    filehandler.cpp
+    App/filehandler.cpp
 )
 qt_add_resources(${CMAKE_PROJECT_NAME} "configuration"
     PREFIX "/"

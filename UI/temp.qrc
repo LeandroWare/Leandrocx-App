@@ -1,0 +1,11 @@
+
+<RCC>
+<qresource>
+<file>qtquickcontrols2.conf</file>
+<file>LeandrocxUIDesign.qmlproject</file>
+<file>LeandrocxUIDesign/Constants.qml</file>
+<file>LeandrocxUIDesign/EventListModel.qml</file>
+<file>LeandrocxUIDesign/EventListSimulator.qml</file>
+<file>LeandrocxUIDesign/qmldir</file>
+</qresource>
+</RCC>

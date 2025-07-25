@@ -1,0 +1,22 @@
+<RCC>
+    <qresource>
+        <file>LeandrocxUIDesign.qmlproject</file>
+        <file>LeandrocxUIDesign/qmldir</file>
+		<file>LeandrocxUIDesign/Constants.qml</file>
+        <file>LeandrocxUIDesignContent/App.qml</file>
+        <file>LeandrocxUIDesignContent/BaseButton.ui.qml</file>
+        <file>LeandrocxUIDesignContent/BaseFileButton.ui.qml</file>
+        <file>LeandrocxUIDesignContent/ContentScreen.ui.qml</file>
+        <file>LeandrocxUIDesignContent/FileButtonBase.ui.qml</file>
+        <file>LeandrocxUIDesignContent/images/clockIcon.svg</file>
+        <file>LeandrocxUIDesignContent/images/EmptyFileIcon.svg</file>
+        <file>LeandrocxUIDesignContent/images/exitIcon.svg</file>
+        <file>LeandrocxUIDesignContent/images/fileIcon.svg</file>
+        <file>LeandrocxUIDesignContent/images/importIcon.svg</file>
+        <file>LeandrocxUIDesignContent/images/ModelLogo.svg</file>
+        <file>LeandrocxUIDesignContent/images/modelsIcon.svg</file>
+        <file>LeandrocxUIDesignContent/Screen01.ui.qml</file>
+        <file>LeandrocxUIDesignContent/SearchBar.ui.qml</file>
+        <file>qtquickcontrols2.conf</file>
+    </qresource>
+</RCC>

@@ -4,8 +4,6 @@
 #include <QApplication>
 #include <QQmlApplicationEngine>
 
-#include "autogen/environment.h"
-
 int main(int argc, char *argv[])
 {
     set_qt_environment();

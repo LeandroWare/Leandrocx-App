@@ -48,7 +48,7 @@ void FileHandler::saveLsdBin(QString content, QString name){
         out << content;
         file.close();
     } else {
-        qWarning() << "ERRO: Impossivel abrir arquivo (saveLsd)" << fileName;
+        qWarning() << "ERRO: Impossivel abrir arquivo (saveLsdBin)" << fileName;
     }
 }
 
@@ -74,32 +74,6 @@ void saveAs (QString content, QString filepath) {
     }
 }
 
-void saveAsBin (QString content, QString filepath) {
-    //TODO - FAZER BGLH PRA MODIFICAR CONTEUDO SE NECESSARIO
-
-    QFile file(filepath);
-
-    //alternativa para utf8:
-    /*
-    QByteArray utf8 = content.toUtf8();
-
-    // Escreve todos os bytes de uma vez
-    qint64 written = file.write(utf8);
-    if (written != utf8.size()) {
-        qWarning() << "Aviso: só escrevi" << written << "de" << utf8.size() << "bytes";
-    }
-    */
-
-    if(file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
-        ///*
-        QDataStream out(&file);
-        out << content;
-        //*/
-        file.close();
-    } else {
-        qWarning() << "ERRO: Impossivel abrir arquivo (saveAs)" << filepath;
-    }
-}
 //=====================================================================================================================================
 //nome auto-explicativo.
 //esse é mais de boa pra chamar, só botar um timer pra chamar periodicamente
@@ -110,15 +84,14 @@ void saveAsBin (QString content, QString filepath) {
     });
 timer->start(300000); // a cada 5 minutos
 */
-void FileHandler::autoSave(QString content){
+void FileHandler::autoSave(const QString& content){
     QString docsPath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/Leandrocx" + "/Docs";
     QDir dir(docsPath);
     if (!dir.exists()){
         dir.mkpath(docsPath);
     }
-    QString fileName = dir.filePath("nome.lsd");
-    saveAs(content, fileName);
-    //saveAsBin(content, filename); //pra salvar como binário
+    saveLsd(content, "autosave");
+    //saveLsdBin(content, "autosave"); //pra salvar como binário
 }
 
 
@@ -144,26 +117,3 @@ void FileHandler::exportPdf(QString content, QString pdfilepath){
     doc.drawContents(&painter);
     painter.end();
 }
-/*int FileHandler::loadCounter(){
-    QString fileName = QDir(qEnvironmentVariable("APPDATA") + "/Leandrocx").filePath("leandros_count.txt");
-
-    QFile file(fileName);
-    if (file.open(QIODevice::ReadOnly | QIODevice::Text)){
-        QTextStream in(&file);
-        int content;
-        in >> content;
-        file.close();
-        return content;
-    }
-
-    return 0;
-}*/
-
-/*void FileHandler::deleteCounter(){
-    QString fileName = QDir(qEnvironmentVariable("APPDATA") + "/Leandrocx").filePath("leandros_count.txt");
-    QFile file(fileName);
-
-    if (file.exists()){
-        file.remove();
-    }
-}*/

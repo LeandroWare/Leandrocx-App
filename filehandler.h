@@ -9,7 +9,7 @@ public:
     explicit FileHandler(QObject* parent = nullptr);
 
     //autosave:
-    Q_INVOKABLE void autoSave(QString content);
+    Q_INVOKABLE void autoSave(const QString& content);
     //só botar um timer pra chamar periodicamente
     /*
         QTimer *timer = new QTimer(this);
@@ -34,7 +34,6 @@ public:
     //exportar como pdf:
     Q_INVOKABLE void exportPdf(QString content, QString pdfilepath);
 
-    Q_INVOKABLE void autoSaveBin(QString content);
     Q_INVOKABLE void saveLsdBin(QString content, QString name);
 };
 

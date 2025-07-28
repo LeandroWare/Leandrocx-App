@@ -18,6 +18,7 @@ import QtMultimedia
 import QtQuick.Studio.Utils
 
 Rectangle {
+    id: root
     width: Constants.width
     height: Constants.height
     anchors.fill: parent
@@ -175,9 +176,19 @@ Rectangle {
 
                     ContentScreen {
                         id: contentScreen
+
+                        onOpenCnpjDialog: mainCnpjDialog.showDialog(modelId, text)
                     }
                 }
             }
         }
+    }
+
+    CnpjDialog {
+        id: mainCnpjDialog
+        anchors.fill: parent
+
+
+
     }
 }

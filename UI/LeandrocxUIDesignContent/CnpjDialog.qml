@@ -70,6 +70,7 @@ Rectangle {
                     placeholderText: qsTr("Insert CNPJ Here…")
                     Layout.fillWidth: true
                     background: textfieldBg // pra sobrescrever o fundo padrão
+                    inputMethodHints: Qt.ImhDigitsOnly
 
 
                     Rectangle{
@@ -78,6 +79,21 @@ Rectangle {
                         border.color: "#b7c2cf"
                         radius: 12
                     }
+
+                    // Aqui faz a mágica do CNPJ formatado
+                        onTextChanged: {
+                            let digits = inputField.text.replace(/\D/g, "").slice(0, 14) // só números, no máximo 14
+                            let formatted = ""
+
+                            if (digits.length > 0) formatted += digits.slice(0, 2)
+                            if (digits.length > 2) formatted += "." + digits.slice(2, 5)
+                            if (digits.length > 5) formatted += "." + digits.slice(5, 8)
+                            if (digits.length > 8) formatted += "/" + digits.slice(8, 12)
+                            if (digits.length > 12) formatted += "-" + digits.slice(12, 14)
+
+                            if (inputField.text !== formatted)
+                                inputField.text = formatted
+                        }
                 }
 
                 RowLayout {

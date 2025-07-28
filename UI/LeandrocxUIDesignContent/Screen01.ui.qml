@@ -177,7 +177,7 @@ Rectangle {
                     ContentScreen {
                         id: contentScreen
 
-                        onOpenCnpjDialog: esseDialog.dialogVisible = true
+                        onOpenCnpjDialog: esseDialog.ativarKaralho(modelId, text)
                     }
                 }
             }

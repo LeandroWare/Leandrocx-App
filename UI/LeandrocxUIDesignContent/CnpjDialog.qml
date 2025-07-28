@@ -14,13 +14,21 @@ Rectangle {
 
     signal requestConfirmation(string modelId, string text)
 
+    function ativarKaralho(bglh1, bglh2){
+        dialogVisible = true
+        dialogModelId = bglh1
+        dialogText = bglh2
+    }
+
     onDialogVisibleChanged: {
         dialogMouseArea.enabled = !dialogMouseArea.enabled
+        dialogMouseArea.visible = !dialogMouseArea.visible
     }
 
     MouseArea {
         id: dialogMouseArea
         enabled: false
+        visible: false
         anchors.fill: parent
     }
 
@@ -77,5 +85,9 @@ Rectangle {
                 }
             }
         }
+    }
+
+    Item {
+        id: __materialLibrary__
     }
 }

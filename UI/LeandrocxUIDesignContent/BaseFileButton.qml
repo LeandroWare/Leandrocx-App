@@ -22,12 +22,17 @@ Button {
     property color hoverBorderColor: "#303D4B"
     property url iconSource: "images/fileIcon.svg"
     property int imageMaring: 25
+    property string modelId: "null"
 
     implicitWidth: 165
     //Layout.minimumHeight: 600 //165
     implicitHeight: 215
     //Layout.preferredHeight: 327
     //Layout.minimumWidth: 800 //145
+
+    onClicked: {
+        openCnpjDialog(modelId, "Jiboia")
+    }
 
     //Layout.preferredWidth: 275
     background: buttonBackground

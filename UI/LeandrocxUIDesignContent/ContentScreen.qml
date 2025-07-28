@@ -10,6 +10,8 @@ Rectangle {
     property int contentIndex: 0
     property color textColor: "#b7c2cf"
 
+    signal openCnpjDialog(string modelId, string text)
+
     StackLayout {
         anchors.fill: parent
         currentIndex: contentIndex
@@ -111,6 +113,7 @@ Rectangle {
 
                             BaseFileButton {
                                 Layout.alignment: Qt.AlignHCenter
+
                             }
                         }
 

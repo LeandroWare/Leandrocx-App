@@ -177,7 +177,7 @@ Rectangle {
                     ContentScreen {
                         id: contentScreen
 
-                        onOpenCnpjDialog: esseDialog.ativarKaralho(modelId, text)
+                        onOpenCnpjDialog: mainCnpjDialog.showDialog(modelId, text)
                     }
                 }
             }
@@ -185,7 +185,7 @@ Rectangle {
     }
 
     CnpjDialog {
-        id: esseDialog
+        id: mainCnpjDialog
         anchors.fill: parent
 
 

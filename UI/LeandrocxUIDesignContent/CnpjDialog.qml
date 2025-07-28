@@ -2,6 +2,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
+import LeandrocxUIDesign 1.0
 
 Rectangle {
     id: root
@@ -9,15 +10,15 @@ Rectangle {
     color: "#00000000"
 
     property bool dialogVisible: false
-    property string dialogModelId: "NULL"
-    property string dialogText: "NULL"
+    property string dialogModelId: "MODEL_ID"
+    property string dialogText: "DIALOG_TEXT"
 
     signal requestConfirmation(string modelId, string text)
 
-    function ativarKaralho(bglh1, bglh2){
+    function showDialog(modelId, text){
         dialogVisible = true
-        dialogModelId = bglh1
-        dialogText = bglh2
+        dialogModelId = modelId
+        dialogText = text
     }
 
     onDialogVisibleChanged: {
@@ -45,35 +46,57 @@ Rectangle {
             width: parent.width * 0.6
             height: 200
             anchors.centerIn: parent
-            color: "#ffffff"
-            radius: 8
-            border.color: "#888"
+            color: Constants.backgroundColor_2
+            radius: 10
+            border.color: "#303d4b"
             ColumnLayout {
                 anchors.fill: parent
                 anchors.margins: 20
                 spacing: 10
 
                 Text {
-                    text: qsTr("Digite o texto para %1").arg(root.dialogModelId)
-                    font.pointSize: 14
+                    color: "#b7c2cf"
+                    text: qsTr("Enter text to model: %1").arg(root.dialogModelId)
+                    font.pointSize: 28
                 }
 
                 TextField {
                     id: inputField
-                    placeholderText: qsTr("Escreva aqui…")
+                    color: "#b7c2cf"
+                    font.pointSize: 16
+                    echoMode: TextInput.Normal
+                    passwordCharacter: ""
+                    placeholderTextColor: "#80ffffff"
+                    placeholderText: qsTr("Insert CNPJ Here…")
                     Layout.fillWidth: true
+                    background: textfieldBg // pra sobrescrever o fundo padrão
+
+
+                    Rectangle{
+                        id: textfieldBg
+                        color: "#0D131D"
+                        border.color: "#b7c2cf"
+                        radius: 12
+                    }
                 }
 
                 RowLayout {
-                    Layout.alignment: Qt.AlignRight
+                    Layout.maximumWidth: 200
+                    Layout.alignment: Qt.AlignLeft
                     spacing: 10
 
-                    Button {
-                        text: qsTr("Cancelar")
+                    LeandroButton {
+                        id: cancelButton
+                        text: "Cancel"
+                        outlineOnly: true
+                        font.bold: false
+                        icon.color: "#b7c2cf"
                         onClicked: root.dialogVisible = false
                     }
-                    Button {
-                        text: qsTr("OK")
+
+                    LeandroButton {
+                        id: sendButton
+                        text: qsTr("Send")
                         enabled: inputField.text.length > 0
                         onClicked: {
                             // emite para o C++ ou para quem for tratar

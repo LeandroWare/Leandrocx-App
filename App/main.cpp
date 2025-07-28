@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 
     // CNPJhandler (nao sei se ta certo)
     CNPJhandler cnpjHandler;
-    qmlRegisterSingletonInstance("br.com.testeCNPJ", 1, 0, "CNPJhandler", &cnpjHandler);
+    engine.rootContext()->setContextProperty("cnpjHandler", &cnpjHandler);
 
     const QUrl url(mainQmlFile);
     QObject::connect(

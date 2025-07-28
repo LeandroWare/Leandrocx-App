@@ -113,7 +113,7 @@ Rectangle {
                     LeandroButton {
                         id: sendButton
                         text: qsTr("Send")
-                        enabled: inputField.text.length > 0
+                        enabled: inputField.text.length >= 18
                         onClicked: {
                             // emite para o C++ ou para quem for tratar
                             root.requestConfirmation(root.dialogModelId, inputField.text)
@@ -121,6 +121,14 @@ Rectangle {
                             inputField.text = ""
                         }
                     }
+                }
+            }
+
+            // recebendo o sinal e mandando pro .cpp
+            Connections {
+                target: root
+                onRequestConfirmation: function(modelId, text) {
+                    cnpjHandler.fetch(text);
                 }
             }
         }

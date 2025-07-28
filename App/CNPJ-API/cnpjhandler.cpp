@@ -114,12 +114,20 @@ void CNPJhandler::setErro(const QString &error) {
     }
 }
 
-// funções que mexem com a API que eu não entendi nada mas o amigo fez funcionar
+// requisitar dados da API e esperar fielmente uma resposta
 void CNPJhandler::fetch(const QString &cnpj) {
+    // esquilo bota uma animação de loading la no treco
     setLoading(true);
     setErro("");
 
-    QUrl url(QStringLiteral("https://open.cnpja.com/office/%1").arg(cnpj));
+    // (des)formatando o cnpj
+    QString cnpjLimpo = cnpj;
+    static const QRegularExpression pontuacao("[^\\d]");
+    cnpjLimpo.remove(pontuacao);
+    setCnpj(cnpj);
+
+    // mandando pra API
+    QUrl url(QStringLiteral("https://open.cnpja.com/office/%1").arg(cnpjLimpo));
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::UserAgentHeader, "QtApp");
 
@@ -167,11 +175,11 @@ void CNPJhandler::onReplyFinished(QNetworkReply *reply) {
 
     reply->deleteLater();
 
-    //qDebug() << "CNPJ: " << m_cnpj;
-    //qDebug() << "Razão Social: " << m_razaoSocial;
-    //qDebug() << "Nome Fantasia: " << m_nomeFantasia;
-    //qDebug() << "Status: " << m_status;
-    //qDebug() << "Atividade Principal: " << m_atvPrincipal;
-    //qDebug() << "Endereço: " << m_rua << m_num << m_bairro << m_cidade << m_estado << m_cep;
-    //qDebug() << "Telefone: " << m_telefone;
+    qDebug() << "CNPJ: " << m_cnpj;
+    qDebug() << "Razão Social: " << m_razaoSocial;
+    qDebug() << "Nome Fantasia: " << m_nomeFantasia;
+    qDebug() << "Status: " << m_status;
+    qDebug() << "Atividade Principal: " << m_atvPrincipal;
+    qDebug() << "Endereço: " << m_rua << m_num << m_bairro << m_cidade << m_estado << m_cep;
+    qDebug() << "Telefone: " << m_telefone;
 }

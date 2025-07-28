@@ -17,7 +17,6 @@ qt6_add_qml_module(LeandrocxUIDesignContent
         "ContentScreen.qml"
         "Screen01.ui.qml"
         "CnpjDialog.qml"
-        "CnpjDialog.qml"
     RESOURCES
         "fonts/MaterialSymbolsOutlined_36pt-Thin.ttf"
         "fonts/MaterialSymbolsOutlined_Filled_36pt-Bold.ttf"

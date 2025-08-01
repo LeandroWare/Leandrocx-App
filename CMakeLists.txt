@@ -23,6 +23,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/App/filehandler)
 qt_add_executable(${CMAKE_PROJECT_NAME}
     App/filehandler/filehandler.h
     App/filehandler/filehandler.cpp
+    App/texteditor/texteditor.h App/texteditor/texteditor.cpp
 )
 qt_add_resources(${CMAKE_PROJECT_NAME} "configuration"
     PREFIX "/"

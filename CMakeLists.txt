@@ -18,13 +18,11 @@ set(QML_IMPORT_PATH ${QT_QML_OUTPUT_DIRECTORY}
 find_package(Qt6 6.8 REQUIRED COMPONENTS Core Gui Widgets Qml Quick QuickTimeline ShaderTools Quick3D)
 qt_standard_project_setup()
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/App/filehandler)
 
 qt_add_executable(${CMAKE_PROJECT_NAME}
-    filehandler.h
-    filehandler.h
-    filehandler.cpp
-    filehandler.cpp
-    App/filehandler.cpp
+    App/filehandler/filehandler.h
+    App/filehandler/filehandler.cpp
 )
 qt_add_resources(${CMAKE_PROJECT_NAME} "configuration"
     PREFIX "/"
@@ -48,3 +46,6 @@ install(TARGETS ${CMAKE_PROJECT_NAME}
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
+
+
+

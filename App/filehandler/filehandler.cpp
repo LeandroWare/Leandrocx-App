@@ -12,43 +12,27 @@ FileHandler::FileHandler(QObject* parent)
 {}
 
 // arquivo salvo em "%APPDATA%\Leandrocx"
-void FileHandler::saveLsd(QString content, QString name){
+void FileHandler::saveLsd(const QString& content, const QString& filepath){
     //TODO - FAZER BGLH PRA MODIFICAR CONTEUDO SE NECESSARIO
 
-    QString docsPath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/Leandrocx" + "/Docs";
-    QDir dir(docsPath);
-    if (!dir.exists()){
-        dir.mkpath(docsPath);
-    }
-    QString fileName = dir.filePath(name + ".lsd"); //real n sei se é simples assim.
-
-    QFile file(fileName);
+    QFile file(filepath);
     if (file.open(QIODevice::WriteOnly | QIODevice::Text)){
         QTextStream out(&file);
         out << content;
-        file.close();
     } else {
-        qWarning() << "ERRO: Impossivel abrir arquivo (saveLsd)" << fileName;
+        qWarning() << "ERRO: Impossivel abrir arquivo (saveLsd)" << filepath;
     }
 }
 
-void FileHandler::saveLsdBin(QString content, QString name){
+void FileHandler::saveLsdBin(const QString& content, const QString& filepath){
     //TODO - FAZER BGLH PRA MODIFICAR CONTEUDO SE NECESSARIO
 
-    QString docsPath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/Leandrocx" + "/Docs";
-    QDir dir(docsPath);
-    if (!dir.exists()){
-        dir.mkpath(docsPath);
-    }
-    QString fileName = dir.filePath(name + ".lsd"); //real n sei se é simples assim.
-
-    QFile file(fileName);
+    QFile file(filepath);
     if (file.open(QIODevice::WriteOnly | QIODevice::Truncate)){
         QDataStream out(&file);
         out << content;
-        file.close();
     } else {
-        qWarning() << "ERRO: Impossivel abrir arquivo (saveLsdBin)" << fileName;
+        qWarning() << "ERRO: Impossivel abrir arquivo (saveLsdBin)" << filepath;
     }
 }
 
@@ -57,10 +41,10 @@ void FileHandler::saveLsdBin(QString content, QString name){
 //pra usar de forma correta, no main ou onde quer que chame essa função, tem que ter o bgl de selecionar onde e como vai salvar:
 /*
     //supondo que você tenha um QFileDialog para pegar o caminho:
-QString path = QFileDialog::getSaveFileName(this, "Salvar como...", "", "Textos (*.txt);;Todos (*.*)");
+const QString& path = QFileDialog::getSaveFileName(this, "Salvar como...", "", "Textos (*.txt);;Todos (*.*)");
 handler.saveAs(textEdit->toPlainText(), path);
 */
-void saveAs (QString content, QString filepath) {
+void saveAs (const QString& content, const QString& filepath) {
     //TODO - FAZER BGLH PRA MODIFICAR CONTEUDO SE NECESSARIO
 
     QFile file(filepath);
@@ -84,19 +68,19 @@ void saveAs (QString content, QString filepath) {
     });
 timer->start(300000); // a cada 5 minutos
 */
-void FileHandler::autoSave(const QString& content){
-    QString docsPath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/Leandrocx" + "/Docs";
+void FileHandler::autoSave(const QString&& content){
+    const QString& docsPath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/Leandrocx" + "/Docs";
     QDir dir(docsPath);
     if (!dir.exists()){
         dir.mkpath(docsPath);
     }
-    saveLsd(content, "autosave");
-    //saveLsdBin(content, "autosave"); //pra salvar como binário
+    //saveLsd(content, "autosave");
+    saveLsdBin(content, "autosave"); //pra salvar como binário
 }
 
 
 //=====================================================================================================================================
-void FileHandler::exportPdf(QString content, QString pdfilepath){
+void FileHandler::exportPdf(const QString& content, const QString& pdfilepath){
     //TODO - FAZER BGLH PRA MODIFICAR CONTEUDO SE NECESSARIO
 
     QPdfWriter writer(pdfilepath);

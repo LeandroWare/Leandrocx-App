@@ -31,6 +31,7 @@ public slots:
 signals:
     void documentModified(bool modif);
     void statusMessage(const QString& message);
+    void requestSaveAs();
 
 private:
     QPlainTextEdit* m_editor;

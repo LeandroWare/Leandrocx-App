@@ -8,8 +8,11 @@ class FileHandler : public QObject
 public:
     explicit FileHandler(QObject* parent = nullptr);
 
+    //abrir lsd
+    QString loadLsd(const QString& filepath);
+
     //autosave:
-    Q_INVOKABLE void autoSave(const QString&& content);
+    void autoSave(const QString&& content);
     //só botar um timer pra chamar periodicamente
     /*
         QTimer *timer = new QTimer(this);
@@ -20,10 +23,10 @@ public:
     */
 
     //salvar como lsd:
-    Q_INVOKABLE void saveLsd(const QString& content, const QString& filepath);
+    void saveLsd(const QString& content, const QString& filepath);
 
     //salvar como:
-    Q_INVOKABLE void saveAs(const QString& content, const QString& filepath);
+    void saveAs(const QString& content, const QString& filepath);
     //pra usar de forma correta, no main ou onde quer que chame essa função, tem que ter o bgl de selecionar onde e como vai salvar:
     /*
     //supondo que tenha um QFileDialog para pegar o caminho:
@@ -32,9 +35,9 @@ public:
     */
 
     //exportar como pdf:
-    Q_INVOKABLE void exportPdf(const QString& content, const QString& pdfilepath);
+    void exportPdf(const QString& content, const QString& pdfilepath);
 
-    Q_INVOKABLE void saveLsdBin(const QString& content, const QString& filepath);
+    void saveLsdBin(const QString& content, const QString& filepath);
 };
 
 #endif // FILEHANDLER_H

@@ -15,23 +15,27 @@ public:
     ~TextEditor() override = default;
 
     //cria um novo documento (limpa o editor e estado interno)
-    void newDocument();
+    Q_INVOKABLE void newDocument();
+
     //abre arquivo de texto (.lsd ou plain .txt)
-    void openDocument(const QString& filePath);
+    Q_INVOKABLE void openDocument(const QString& filePath);
+
     //salva no arquivo atual usando FileHandler
-    void saveDocument();
+    Q_INVOKABLE void saveDocument();
+
     //salva como, definindo novo caminho
-    void saveDocumentAs(const QString& filePath);
+    Q_INVOKABLE void saveDocumentAs(const QString& filePath);
+
     //exporta para PDF usando FileHandler
-    void exportToPdf(const QString& filePath);
+    Q_INVOKABLE void exportToPdf(const QString& filePath);
 
 public slots:
     void autosave();
 
 signals:
     void documentModified(bool modif);
-    void statusMessage(const QString& message);
-    void requestSaveAs();
+    void statusMessage(const QString& message); //feedback
+    void requestSaveAs();                       //pro primeiro save
 
 private:
     QPlainTextEdit* m_editor;
@@ -40,6 +44,7 @@ private:
     bool m_isUntitled;
     QTimer m_autosaveTimer;
 
+    //de forma porca: seta tudo q precisa pro autosave funcionar
     void setupAutoSave(int intervalMs);
 };
 

@@ -7,16 +7,24 @@
 #include <QPainter>
 #include <QTextDocument>
 
-FileHandler::FileHandler(QObject* parent)
-    : QObject(parent)
-{}
+FileHandler::FileHandler(QObject* parent): QObject(parent) {}
+
+QString FileHandler::loadLsd(const QString& filepath) {
+    QFile file(filepath);
+
+    if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
+        return QString();
+
+    QTextStream in(&file);
+    return in.readAll();
+}
 
 // arquivo salvo em "%APPDATA%\Leandrocx"
 void FileHandler::saveLsd(const QString& content, const QString& filepath){
     //TODO - FAZER BGLH PRA MODIFICAR CONTEUDO SE NECESSARIO
 
     QFile file(filepath);
-    if (file.open(QIODevice::WriteOnly | QIODevice::Text)){
+    if(file.open(QIODevice::WriteOnly | QIODevice::Text)){
         QTextStream out(&file);
         out << content;
     } else {

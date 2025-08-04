@@ -3,13 +3,13 @@
 #include <QFileInfo>
 #include <QFileDialog>
 #include <QStandardPaths>
-#include <QString>
 
 TextEditor::TextEditor(QPlainTextEdit* editor, FileHandler* fileHandler, QObject* parent)
     : QObject(parent), m_editor(editor), m_fileHandler(fileHandler), m_isUntitled(true)
 {
     //conecta modificação de documento ao sinal documentModified
     connect(m_editor->document(), &QTextDocument::modificationChanged, this, &TextEditor::documentModified);
+
     //configura autosave a cada 5 minutos
     setupAutoSave(5 * 60 * 1000);
 }

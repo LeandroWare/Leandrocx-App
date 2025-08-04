@@ -19,7 +19,7 @@ QString FileHandler::loadLsd(const QString& filepath) {
     return in.readAll();
 }
 
-// arquivo salvo em "%APPDATA%\Leandrocx"
+//salva como Lsd
 void FileHandler::saveLsd(const QString& content, const QString& filepath){
     //TODO - FAZER BGLH PRA MODIFICAR CONTEUDO SE NECESSARIO
 
@@ -65,27 +65,6 @@ void saveAs (const QString& content, const QString& filepath) {
         qWarning() << "ERRO: Impossivel abrir arquivo (saveAs)" << filepath;
     }
 }
-
-//=====================================================================================================================================
-//nome auto-explicativo.
-//esse é mais de boa pra chamar, só botar um timer pra chamar periodicamente
-/*
-    QTimer *timer = new QTimer(this);
-    connect(timer, &QTimer::timeout, [&]() {
-        handler.autoSave(textEdit->toPlainText());
-    });
-timer->start(300000); // a cada 5 minutos
-*/
-void FileHandler::autoSave(const QString&& content){
-    const QString& docsPath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/Leandrocx" + "/Docs";
-    QDir dir(docsPath);
-    if (!dir.exists()){
-        dir.mkpath(docsPath);
-    }
-    //saveLsd(content, "autosave");
-    saveLsdBin(content, "autosave"); //pra salvar como binário
-}
-
 
 //=====================================================================================================================================
 void FileHandler::exportPdf(const QString& content, const QString& pdfilepath){

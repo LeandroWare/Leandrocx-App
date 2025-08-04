@@ -11,17 +11,6 @@ public:
     //abrir lsd
     QString loadLsd(const QString& filepath);
 
-    //autosave:
-    void autoSave(const QString&& content);
-    //só botar um timer pra chamar periodicamente
-    /*
-        QTimer *timer = new QTimer(this);
-        connect(timer, &QTimer::timeout, [&]() {
-            handler.autoSave(textEdit->toPlainText());
-        });
-        timer->start(300000); // a cada 5 minutos
-    */
-
     //salvar como lsd:
     void saveLsd(const QString& content, const QString& filepath);
 

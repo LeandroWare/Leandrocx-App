@@ -19,10 +19,7 @@ qt6_add_qml_module(LeandrocxUIDesignContent
         "BaseFileButton.qml"
         "ContentScreen.qml"
         "Screen02_cnpj.qml"
-        "Screen02_cnpj.qml"
         "Screen03_Editor.qml"
-        "Screen03_Editor.qml"
-        "Screen04_Export.qml"
         "Screen04_Export.qml"
     RESOURCES
         "fonts/Montserrat-Italic-VariableFont_wght.ttf"

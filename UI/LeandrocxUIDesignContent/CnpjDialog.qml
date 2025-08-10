@@ -119,6 +119,7 @@ Rectangle {
                             root.requestConfirmation(root.dialogModelId, inputField.text)
                             root.dialogVisible = false
                             inputField.text = ""
+                            stack.push("Screen02_cnpj.qml")
                         }
                     }
                 }

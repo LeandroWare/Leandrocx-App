@@ -83,8 +83,8 @@ Rectangle {
             hoverEnabled: true
             placeholderText: "Pesquisar"
             background: null
-            selectionColor: "#00343e4f"
-            selectedTextColor: "#00343e4f"
+            selectionColor: "#124fb6"
+            selectedTextColor: "#aab1be"
             color: "white"
 
             selectByMouse: true

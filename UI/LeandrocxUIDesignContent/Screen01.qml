@@ -19,8 +19,8 @@ import QtQuick.Studio.Utils
 
 Rectangle {
     id: root
-    width: Constants.width
-    height: Constants.height
+    width: 1280
+    height: 720
     anchors.fill: parent
 
     // Responsivo com o tamanho da janela

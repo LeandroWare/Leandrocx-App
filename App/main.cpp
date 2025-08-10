@@ -3,7 +3,8 @@
 
 #include <QApplication>
 #include <QQmlApplicationEngine>
-
+#include <QQmlContext>
+#include "CNPJ-API/cnpjhandler.h"
 #include "autogen/environment.h"
 
 int main(int argc, char *argv[])
@@ -12,13 +13,18 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
+
+    // CNPJhandler (nao sei se ta certo)
+    CNPJhandler cnpjHandler;
+    engine.rootContext()->setContextProperty("cnpjHandler", &cnpjHandler);
+
     const QUrl url(mainQmlFile);
     QObject::connect(
-                &engine, &QQmlApplicationEngine::objectCreated, &app,
-                [url](QObject *obj, const QUrl &objUrl) {
-        if (!obj && url == objUrl)
-            QCoreApplication::exit(-1);
-    }, Qt::QueuedConnection);
+        &engine, &QQmlApplicationEngine::objectCreated, &app,
+        [url](QObject *obj, const QUrl &objUrl) {
+            if (!obj && url == objUrl)
+                QCoreApplication::exit(-1);
+        }, Qt::QueuedConnection);
 
     engine.addImportPath(QCoreApplication::applicationDirPath() + "/qml");
     engine.addImportPath(":/");

@@ -17,7 +17,7 @@ Button {
     rightPadding: 4
 
     text: ""
-    property string sdasd: "Texto ok"
+    property string fileText: "Texto ok"
     property color hoverColor: "#171E29"
     property color hoverBorderColor: "#303D4B"
     property url iconSource: "images/fileIcon.svg"
@@ -111,7 +111,7 @@ Button {
                     id: textItem
                     opacity: enabled ? 1.0 : 0.3
                     color: "#b7c2cf"
-                    text: control.sdasd
+                    text: control.fileText
 
                     anchors.left: parent.left
                     anchors.right: parent.right

@@ -175,11 +175,11 @@ void CNPJhandler::onReplyFinished(QNetworkReply *reply) {
 
     reply->deleteLater();
 
-    //qDebug() << "CNPJ: " << m_cnpj;
-    //qDebug() << "Razão Social: " << m_razaoSocial;
-    //qDebug() << "Nome Fantasia: " << m_nomeFantasia;
-    //qDebug() << "Status: " << m_status;
-    //qDebug() << "Atividade Principal: " << m_atvPrincipal;
-    //qDebug() << "Endereço: " << m_rua << m_num << m_bairro << m_cidade << m_estado << m_cep;
-    //qDebug() << "Telefone: " << m_telefone;
+    qDebug() << "CNPJ: " << m_cnpj;
+    qDebug() << "Razão Social: " << m_razaoSocial;
+    qDebug() << "Nome Fantasia: " << m_nomeFantasia;
+    qDebug() << "Status: " << m_status;
+    qDebug() << "Atividade Principal: " << m_atvPrincipal;
+    qDebug() << "Endereço: " << m_rua << m_num << m_bairro << m_cidade <<
+    m_estado << m_cep; qDebug() << "Telefone: " << m_telefone;
 }

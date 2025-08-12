@@ -106,14 +106,14 @@ Rectangle {
                         flow: GridLayout.LeftToRight
 
                         property int max_quantity: 8
-                        property int quantity: 8
+                        property int quantity: 1
 
                         Repeater {
                             model: parent.quantity // Pode ser qualquer número menor que 15
 
                             BaseFileButton {
                                 Layout.alignment: Qt.AlignHCenter
-
+                                fileText: "Passive Blank"
                             }
                         }
 

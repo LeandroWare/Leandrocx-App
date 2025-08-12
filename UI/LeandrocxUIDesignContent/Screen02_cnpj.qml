@@ -46,14 +46,28 @@ Rectangle {
                 anchors.fill: parent
                 anchors.margins: 10
 
+                ListModel {
+                    id: camposCnpj
+                    ListElement { titulo: "CNPJ"; getter: "cnpj" }
+                    ListElement { titulo: "Razão Social"; getter: "razaoSocial" }
+                    ListElement { titulo: "Nome Fantasia"; getter: "nomeFantasia" }
+                    ListElement { titulo: "Atividade Principal"; getter: "atvPrincipal" }
+                    ListElement { titulo: "Status"; getter: "status" }
+                    ListElement { titulo: "Telefone"; getter: "telefone" }
+                    ListElement { titulo: "Rua"; getter: "rua" }
+                    ListElement { titulo: "Número"; getter: "num" }
+                    ListElement { titulo: "Bairro"; getter: "bairro" }
+                    ListElement { titulo: "CEP"; getter: "cep" }
+                    ListElement { titulo: "Cidade"; getter: "cidade" }
+                    ListElement { titulo: "Estado"; getter: "estado" }
+                }
+
                 Repeater {
-                    model: 11  // quantidade de cards
+                    model: camposCnpj
                     delegate: Rectangle {
-                        property string cnpjInfo: "Placeholder " + (index + 1)
                         color: Constants.backgroundColor_2
                         radius: 8
                         border.color: Constants.backGroundColor_Secondary
-
                         Layout.preferredWidth: 300
                         Layout.preferredHeight: 100
 
@@ -63,13 +77,21 @@ Rectangle {
                             spacing: 5
 
                             Text {
-                                text: cnpjInfo
+                                text: titulo
                                 color: Constants.defaultTextColor
                                 font.pixelSize: 16
                             }
+
                             SearchBar {
-                                text: cnpjInfo
+                                text: cnpjHandler[getter] || "NULL"
                                 Layout.fillWidth: true
+
+                                onTextChanged: {
+                                    let setter = "set" + getter.charAt(0).toUpperCase() + getter.slice(1);
+                                    if (typeof cnpjHandler[setter] === "function") {
+                                        cnpjHandler[setter](text);
+                                    }
+                                }
                             }
                         }
                     }

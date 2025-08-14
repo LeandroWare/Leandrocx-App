@@ -16,15 +16,21 @@ set(QML_IMPORT_PATH ${QT_QML_OUTPUT_DIRECTORY}
 )
 
 find_package(Qt6 6.8 REQUIRED COMPONENTS Core Gui Widgets Qml Quick QuickTimeline ShaderTools Quick3D)
+find_package(Qt6 REQUIRED COMPONENTS Core)
+find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
 qt_standard_project_setup()
 
 
 qt_add_executable(${CMAKE_PROJECT_NAME}
+    WIN32
     App/CNPJ-API/cnpjhandler.h App/CNPJ-API/cnpjhandler.cpp
+    App/Model-Handler/modelhandler.h App/Model-Handler/modelhandler.cpp
 
 )
 qt_add_resources(${CMAKE_PROJECT_NAME} "configuration"
-    PREFIX "/"
+
+target_link_libraries(Leandrocx-App PRIVATE Qt6::Core)
+PREFIX "/"
     FILES
         qtquickcontrols2.conf
     )
@@ -45,3 +51,6 @@ install(TARGETS ${CMAKE_PROJECT_NAME}
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
+
+target_include_directories(Leandrocx-App PRIVATE ${Python3_INCLUDE_DIRS})
+target_link_libraries(Leandrocx-App PRIVATE Python3::Python)

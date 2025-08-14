@@ -87,10 +87,7 @@ Rectangle {
                                 Layout.fillWidth: true
 
                                 onTextChanged: {
-                                    let setter = "set" + getter.charAt(0).toUpperCase() + getter.slice(1);
-                                    if (typeof cnpjHandler[setter] === "function") {
-                                        cnpjHandler[setter](text);
-                                    }
+                                    cnpjHandler[getter] = text
                                 }
                             }
                         }
@@ -112,6 +109,8 @@ Rectangle {
                 anchors.margins: 10
 
                 onClicked: {
+                    cnpjHandler.updateCnpjData();
+                    modelHandler.CreatePassiveModel();
                     stack.push("Screen03_Editor.qml")
                 }
             }

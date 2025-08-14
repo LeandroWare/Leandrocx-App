@@ -135,3 +135,6 @@ CMakeLists.txt.user*
 .rcc/
 .uic/
 /build*/
+/out/
+.vs/
+*.docx

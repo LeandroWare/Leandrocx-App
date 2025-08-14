@@ -72,19 +72,81 @@ Rectangle {
                             color: Constants.defaultTextColor
                             font.pixelSize: 20
                         }
-                        SearchBar {
-                            id: fileNameField
-                            placeholderText: "LeandrocxFile"
+
+                        Item{
                             Layout.fillWidth: true
-                            onTextChanged: {
-                                parent.parent.fileName = text
+                            height: 40
+
+                            TextField {
+                                id: inputField
+                                color: "#384554"
+                                anchors.fill: parent
+                                font.pointSize: 12
+                                echoMode: TextInput.Normal
+                                passwordCharacter: ""
+                                placeholderTextColor: "#343e4f"
+                                placeholderText: qsTr("LeandrocxFile")
+                                Layout.fillWidth: true
+                                background: textfieldBg // pra sobrescrever o fundo padrão
+                                inputMethodHints: Qt.ImhNone
+
+                                validator: RegularExpressionValidator {
+                                        regularExpression: /^[A-Za-z0-9_-]*$/
+                                    }
+
+                                Rectangle{
+                                    id: textfieldBg
+                                    color: "#00000000"
+                                    border.color: "#384554"
+                                    radius: 12
+                                }
                             }
+
+                            // Animação quando focado
+                            states: [
+                                State {
+                                    name: "focused"
+                                    when: inputField.focus
+
+                                    // PropertyChanges {
+                                    //     target: icon
+                                    //     color: textColorHover
+                                    // }
+                                    PropertyChanges {
+                                        target: inputField
+                                        color: "#b7c2cf"
+                                        placeholderTextColor: "#b7c2cf"
+                                    }
+
+                                    PropertyChanges {
+                                        target: textfieldBg
+                                        color: "#0d131d"
+                                        border.color: "#b7c2cf"
+                                    }
+                                },
+                                State {
+                                    name: "normal"
+                                    when: !inputField.focus
+
+                                    PropertyChanges {
+                                        target: inputField
+                                        color: "#343e4f"
+                                        placeholderTextColor: "#343e4f"
+                                    }
+
+                                    // PropertyChanges {
+                                    //     target: icon
+                                    //     color: textColorNormal
+                                    // }
+                                    PropertyChanges {
+                                        target: textfieldBg
+                                        color: "#001e1e1e"
+                                        border.color: "#384554"
+                                    }
+                                }
+                            ]
                         }
                     }
-                }
-
-                Rectangle{
-
                 }
             }
         }
@@ -99,10 +161,10 @@ Rectangle {
                 text: qsTr("Export")
                 anchors.fill: parent
                 anchors.margins: 10
-                enabled: fileNameField.text.length >= 1
+                enabled: inputField.text.length >= 1
 
                 onClicked: {
-                    modelHandler.exportDocument(fileNameField.text)
+                    modelHandler.exportDocument(inputField.text)
                     stack.push("Screen01.qml")
                 }
             }

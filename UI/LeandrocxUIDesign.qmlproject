@@ -7,7 +7,7 @@ Project {
     mainFile: "LeandrocxUIDesignContent/App.qml"
     mainUiFile: "LeandrocxUIDesignContent/Screen01.ui.qml"
     targetDirectory: "/opt/LeandrocxUIDesign"
-    enableCMakeGeneration: true
+    enableCMakeGeneration: false
     enablePythonGeneration: false
     widgetApp: true
     importPaths: [ "." ]

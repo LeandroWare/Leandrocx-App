@@ -73,6 +73,7 @@ Rectangle {
                             font.pixelSize: 20
                         }
                         SearchBar {
+                            id: fileNameField
                             placeholderText: "LeandrocxFile"
                             Layout.fillWidth: true
                             onTextChanged: {
@@ -96,11 +97,12 @@ Rectangle {
             LeandroButton {
                 id: confirmButton
                 text: qsTr("Export")
-                enabled: true
                 anchors.fill: parent
                 anchors.margins: 10
+                enabled: fileNameField.text.length >= 1
 
                 onClicked: {
+                    modelHandler.exportDocument(fileNameField.text)
                     stack.push("Screen01.qml")
                 }
             }

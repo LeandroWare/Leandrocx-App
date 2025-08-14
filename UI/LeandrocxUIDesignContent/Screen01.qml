@@ -164,6 +164,7 @@ Rectangle {
                             text: "Exit"
                             iconSource: "images/exitIcon.svg"
                             Layout.fillWidth: true
+                            onClicked: Qt.quit()
                         }
                     }
                 }

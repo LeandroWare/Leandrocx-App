@@ -4,7 +4,10 @@
 #include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+
 #include "CNPJ-API/cnpjhandler.h"
+#include "Model-Handler/modelhandler.h"
+
 #include "autogen/environment.h"
 
 int main(int argc, char *argv[])
@@ -17,6 +20,12 @@ int main(int argc, char *argv[])
     // CNPJhandler (nao sei se ta certo)
     CNPJhandler cnpjHandler;
     engine.rootContext()->setContextProperty("cnpjHandler", &cnpjHandler);
+
+    // teste com o model handler
+    ModelHandler modelHandler;
+    engine.rootContext()->setContextProperty("modelHandler", &modelHandler);
+
+    QObject::connect(&cnpjHandler, &CNPJhandler::cnpjDataChanged, &modelHandler, &ModelHandler::updateCnpjData);
 
     const QUrl url(mainQmlFile);
     QObject::connect(

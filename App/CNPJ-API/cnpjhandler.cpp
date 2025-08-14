@@ -12,6 +12,7 @@ CNPJhandler::CNPJhandler(QObject *parent) : QObject(parent), m_nam(new QNetworkA
 }
 
 // get (basicamente igual o contador do LeandroCLicker)
+QList<QString> CNPJhandler::cnpjData() const{ return m_cnpjData; }
 QString CNPJhandler::cnpj() const{return m_cnpj;}
 QString CNPJhandler::razaoSocial() const{return m_razaoSocial;}
 QString CNPJhandler::rua() const{return m_rua;}
@@ -32,79 +33,91 @@ QString CNPJhandler::erro() const{return m_erro;}
 void CNPJhandler::setCnpj(const QString &valor){
     if(m_cnpj != valor){
         m_cnpj = valor;
+
         emit cnpjChanged();
     }
 }
 void CNPJhandler::setRazaoSocial(const QString &valor) {
     if (m_razaoSocial != valor) {
         m_razaoSocial = valor;
+
         emit razaoSocialChanged();
     }
 }
 void CNPJhandler::setRua(const QString &valor) {
     if (m_rua != valor) {
         m_rua = valor;
+
         emit ruaChanged();
     }
 }
 void CNPJhandler::setNum(const QString &valor) {
     if (m_num != valor) {
         m_num = valor;
+
         emit numChanged();
     }
 }
 void CNPJhandler::setBairro(const QString &valor) {
     if (m_bairro != valor) {
         m_bairro = valor;
+
         emit bairroChanged();
     }
 }
 void CNPJhandler::setCep(const QString &valor) {
     if (m_cep != valor) {
         m_cep = valor;
+
         emit cepChanged();
     }
 }
 void CNPJhandler::setCidade(const QString &valor) {
     if (m_cidade != valor) {
         m_cidade = valor;
+
         emit cidadeChanged();
     }
 }
 void CNPJhandler::setEstado(const QString &valor) {
     if (m_estado != valor) {
         m_estado = valor;
+
         emit estadoChanged();
     }
 }
 void CNPJhandler::setAtvPrincipal(const QString &valor) {
     if (m_atvPrincipal != valor) {
         m_atvPrincipal = valor;
+
         emit atvPrincipalChanged();
     }
 }
 void CNPJhandler::setNomeFantasia(const QString &valor) {
     if (m_nomeFantasia != valor) {
         m_nomeFantasia = valor;
+
         emit nomeFantasiaChanged();
     }
 }
 void CNPJhandler::setStatus(const QString &valor) {
     if (m_status != valor) {
         m_status = valor;
+
         emit statusChanged();
     }
 }
 void CNPJhandler::setTelefone(const QString &valor) {
     if (m_telefone != valor) {
         m_telefone = valor;
+
         emit telefoneChanged();
     }
 }
 void CNPJhandler::setLoading(bool valor) {
     if (m_loading != valor) {
         m_loading = valor;
-        emit loadingChanged();
+        emit loadingChanged(valor);
     }
 }
 void CNPJhandler::setErro(const QString &error) {
@@ -112,6 +125,23 @@ void CNPJhandler::setErro(const QString &error) {
         m_erro = error;
         emit erroOcorrido(error);
     }
+}
+void CNPJhandler::setCnpjData() {
+    m_cnpjData.clear();
+    m_cnpjData.append(m_razaoSocial);
+    m_cnpjData.append(m_cnpj);
+    m_cnpjData.append(m_rua);
+    m_cnpjData.append(m_num);
+    m_cnpjData.append(m_bairro);
+    m_cnpjData.append(m_cep);
+    m_cnpjData.append(m_cidade);
+    m_cnpjData.append(m_estado);
+
+    qDebug() << "CNPJ DATA EMITTED";
+    for (auto i : m_cnpjData) {
+        qDebug() << i;
+    }
+    emit cnpjDataChanged(m_cnpjData);
 }
 
 // requisitar dados da API e esperar fielmente uma resposta
@@ -132,6 +162,10 @@ void CNPJhandler::fetch(const QString &cnpj) {
     request.setHeader(QNetworkRequest::UserAgentHeader, "QtApp");
 
     m_nam->get(request);
+}
+
+void CNPJhandler::updateCnpjData() {
+    setCnpjData();
 }
 
 void CNPJhandler::onReplyFinished(QNetworkReply *reply) {
@@ -172,6 +206,8 @@ void CNPJhandler::onReplyFinished(QNetworkReply *reply) {
     setNomeFantasia(obj.value("alias").toString());
     setStatus(status.value("text").toString());
     setTelefone(phones.value("number").toString());
+
+    //setCnpjData();
 
     reply->deleteLater();
 

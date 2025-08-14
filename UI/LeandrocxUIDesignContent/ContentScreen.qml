@@ -183,7 +183,7 @@ Rectangle {
                         flow: GridLayout.LeftToRight
 
                         property int max_quantity: 8
-                        property int quantity: 8
+                        property int quantity: 0
 
                         Repeater {
                             model: parent.quantity // Pode ser qualquer número menor que 15
@@ -310,7 +310,7 @@ Rectangle {
                         flow: GridLayout.LeftToRight
 
                         property int max_quantity: 8
-                        property int quantity: 8
+                        property int quantity: 0
 
                         Repeater {
                             model: parent.quantity // Pode ser qualquer número menor que 15
